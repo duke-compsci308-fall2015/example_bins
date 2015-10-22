@@ -9,33 +9,22 @@ import java.util.PriorityQueue;
  * @author rcd
  */
 public class WorstFitAlgorithm {
-    public static final String WORST_FIT_METHOD = "worst-fit";
-    private String myDescription;
 
     /**
      * Default constructor
      */
-    public WorstFitAlgorithm () {
-        this(WORST_FIT_METHOD);
-    }
-
-    /**
-     * Create with given descriptor.
-     */
-    public WorstFitAlgorithm (String description) {
-        myDescription = description;
-    }
+    public WorstFitAlgorithm () {}
 
     /**
      * Allocates given files to the fewest number of disks.
      *
      * @param data collection of files to be allocated to disks
      */
-    public void fitDisksAndPrint (List<Integer> data) {
+    public void fitDisksAndPrint (List<Integer> data, OrganizeData organizer, String description) {
         List<Integer> copy = new ArrayList<>(data);
-        organizeData(copy);
+        organizer.organizeData(data);
         Collection<Disk> disks = addFiles(copy);
-        printResults(disks, myDescription);
+        printResults(disks, description);
     }
 
     /**

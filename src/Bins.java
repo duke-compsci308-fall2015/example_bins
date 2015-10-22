@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,12 +9,8 @@ import java.util.Scanner;
  */
 public class Bins {
     public static final String DATA_FILE = "example.txt";
-    // all possible algorithms to compare --- add new instances here!
-    private static WorstFitAlgorithm algortihmsToCompare[] = { 
-        new WorstFitAlgorithm(),
-        new WorstFitDecreasingAlgorithm()
-    };
-
+    public static final String WORST_FIT_METHOD = "worst-fit";
+    public static final String WORST_FIT_DECREASING_METHOD = "worst-fit decreasing method";
 
     /**
      * Reads list of integer data from the given input.
@@ -50,8 +47,10 @@ public class Bins {
         List<Integer> data = b.readData(input);
         System.out.println("total size = " + b.getTotal(data) / 1000000.0 + "GB");
 
-        for (WorstFitAlgorithm al : algortihmsToCompare) {
-            al.fitDisksAndPrint(data);
-        }
+        WorstFitAlgorithm al = new WorstFitAlgorithm();
+        al.fitDisksAndPrint(data, data_arg -> {}, WORST_FIT_METHOD);
+        al.fitDisksAndPrint(data, data_arg -> {
+        	Collections.sort(data_arg, Collections.reverseOrder());
+        }, WORST_FIT_DECREASING_METHOD);
     }
 }

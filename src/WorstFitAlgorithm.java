@@ -31,11 +31,13 @@ public class WorstFitAlgorithm {
      *
      * @param data collection of files to be allocated to disks
      */
-    public void fitDisksAndPrint (List<Integer> data) {
-        List<Integer> copy = new ArrayList<>(data);
-        organizeData(copy);
+    public void fitDisksAndPrint (List<Integer> data, StaticAbstractMultiInheritedGlobalInterface i) {
+    	List<Integer> copy = new ArrayList<>(i.operate(data));
+       // organizeData(copy);
         Collection<Disk> disks = addFiles(copy);
         printResults(disks, myDescription);
+
+
     }
 
     /**

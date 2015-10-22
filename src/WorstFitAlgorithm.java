@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.function.Consumer;
 
 /**
  * This class represents worst-fit algorithms for allocating files to disks.
@@ -10,20 +11,11 @@ import java.util.PriorityQueue;
  */
 public class WorstFitAlgorithm {
     public static final String WORST_FIT_METHOD = "worst-fit";
-    private String myDescription;
 
     /**
      * Default constructor
      */
     public WorstFitAlgorithm () {
-        this(WORST_FIT_METHOD);
-    }
-
-    /**
-     * Create with given descriptor.
-     */
-    public WorstFitAlgorithm (String description) {
-        myDescription = description;
     }
 
     /**
@@ -31,11 +23,11 @@ public class WorstFitAlgorithm {
      *
      * @param data collection of files to be allocated to disks
      */
-    public void fitDisksAndPrint (List<Integer> data) {
+    public void fitDisksAndPrint (List<Integer> data, String name, Consumer<List<?>> processor) {
         List<Integer> copy = new ArrayList<>(data);
-        organizeData(copy);
+        processor.accept(copy);
         Collection<Disk> disks = addFiles(copy);
-        printResults(disks, myDescription);
+        printResults(disks, name);
     }
 
     /**

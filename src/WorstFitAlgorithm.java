@@ -31,8 +31,9 @@ public class WorstFitAlgorithm {
      *
      * @param data collection of files to be allocated to disks
      */
-    public void fitDisksAndPrint (List<Integer> data) {
+    public void fitDisksAndPrint (List<Integer> data, ITransformList lambda) {
         List<Integer> copy = new ArrayList<>(data);
+        lambda.fitDisksAndPrintLambda(data);
         organizeData(copy);
         Collection<Disk> disks = addFiles(copy);
         printResults(disks, myDescription);
@@ -74,4 +75,5 @@ public class WorstFitAlgorithm {
             System.out.println(d);
         }
     }
+
 }

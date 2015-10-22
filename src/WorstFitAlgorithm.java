@@ -31,9 +31,9 @@ public class WorstFitAlgorithm {
      *
      * @param data collection of files to be allocated to disks
      */
-    public void fitDisksAndPrint (List<Integer> data) {
+    public void fitDisksAndPrint (List<Integer> data, IChangeList<Integer> func) {
         List<Integer> copy = new ArrayList<>(data);
-        organizeData(copy);
+        func.changeList(copy);
         Collection<Disk> disks = addFiles(copy);
         printResults(disks, myDescription);
     }
@@ -43,9 +43,6 @@ public class WorstFitAlgorithm {
      *
      * @param disks collection of disks to be printed
      */
-    protected void organizeData (List<Integer> data) {
-        // by default, do nothing
-    }
 
     // add files to the collection of Disks
     private Collection<Disk> addFiles (List<Integer> data) {

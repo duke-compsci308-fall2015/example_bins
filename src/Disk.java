@@ -5,6 +5,9 @@ import java.util.List;
  * Represents a collection of files; how many it can hold is limited by its capacity.
  */
 public class Disk implements Comparable<Disk> {
+    public static final int MAX_CAPACITY = 1000000;
+    private static int ourId = 0;
+
     private int myId;
     private int mySize;
     private int myCapacity;
@@ -14,9 +17,8 @@ public class Disk implements Comparable<Disk> {
      * Create an empty Disk.
      */
     public Disk () {
-        mySize = 0;
-        myCapacity = 1000000;
-        myFiles = new ArrayList<Integer>();
+        this(ourId);
+        ourId++;
     }
 
     /**
@@ -25,8 +27,15 @@ public class Disk implements Comparable<Disk> {
     public Disk (int id) {
         myId = id;
         mySize = 0;
-        myCapacity = 1000000;
+        myCapacity = MAX_CAPACITY;
         myFiles = new ArrayList<Integer>();
+    }
+
+    /**
+     * @return true iff the given disk size fits on this disk
+     */
+    public boolean canFit (int size) {
+        return freeSpace() >= size;
     }
 
     /**
@@ -54,8 +63,8 @@ public class Disk implements Comparable<Disk> {
     @Override
     public String toString () {
         String result = myId + "\t" + freeSpace() + ":\t";
-        for (int k = 0; k < myFiles.size(); k++) {
-            result += " " + myFiles.get(k);
+        for (Integer f : myFiles) {
+            result += " " + f;
         }
         return result;
     }
@@ -70,15 +79,7 @@ public class Disk implements Comparable<Disk> {
      */
     @Override
     public boolean equals (Object other) {
-        if (other != null && other instanceof Disk) {
-            if (myId == ((Disk) other).myId) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
+        return other != null && other instanceof Disk && myId == ((Disk)other).myId;
     }
 
     /**

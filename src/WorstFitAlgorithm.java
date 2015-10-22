@@ -37,6 +37,15 @@ public class WorstFitAlgorithm {
         Collection<Disk> disks = addFiles(copy);
         printResults(disks, myDescription);
     }
+    
+    /**
+     * RECITATION MATERIAL TJKSL
+     * 
+     * @param data
+     */
+    public void fitDisksAndPrint(List<Integer> data, DecideSort sortType) {
+    	sortType.decide(data);
+    }
 
     /**
      * Arrange given data in preparation for fitting disks.

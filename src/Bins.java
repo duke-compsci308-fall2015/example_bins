@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -51,7 +52,8 @@ public class Bins {
         System.out.println("total size = " + b.getTotal(data) / 1000000.0 + "GB");
 
         for (WorstFitAlgorithm al : algortihmsToCompare) {
-            al.fitDisksAndPrint(data);
+        	al.fitDisksAndPrint(data);
+            al.fitDisksAndPrint(data, decideSort -> Collections.shuffle(decideSort));
         }
     }
 }
